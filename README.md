@@ -39,7 +39,41 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+So if you are convinced this gem helps you, you can easily use it in your Rails app as follows.
+
+### Installation setup above
+
+Follow Installation above
+
+### Create an initializer to setup your environment
+
+If you are using the logstasher gem too then proceed as follows (TODO: for having setup logstash as ``logstasher.supress_app_log``):
+*config/initializers/logger_instrumenation.rb*
+```ruby
+if Module.const_defined?('LoggerInstrumentation') && LoggerInstrumentation.enabled?
+  if Module.const_defined?('LogStasher') and LogStasher.enabled?
+    require 'logger_instrumentation/log_stasher_log_subscriber'
+  end
+  require 'logger_instrumentation/log_subscriber'
+  LoggerInstrumentation.logger = Rails.logger
+end
+```
+Then enable for your environment (like development here):
+*config/environments/development.rb*
+```
+..
+config.logger_instrumentation.enabled = true
+```
+
+Now whereever you would normally use ``Rails.logger.info`` or ``Rail.logger.debug`` or friends just use/replace with 
+``LoggerInstrumenation::Instrumentation.info`` or ``LoggerInstrumenation::Instrumentation.debug`` or whatever log level you intend to use.
+
+```ruby
+LoggerInstrumenation::Instrumentation.info('hello world.')
+```
+
+It's also instead of just a string possible to pass a ``Hash`` to this method. For something like logstash it will just convert the ``Hash`` to ``JSON``. For the
+normal logger it will execute the ``to_s`` method.
 
 ## Development
 
