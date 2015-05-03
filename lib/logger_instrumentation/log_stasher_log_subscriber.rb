@@ -22,17 +22,39 @@ module LoggerInstrumentation
 
     def convert(event)
       data = event.payload
+      data.merge! request_context
+      data.merge! extract_custom_fields(data)
+      data.merge! runtimes(event)
       data.merge!(
         {
           name: event.name,
           time: event.time,
           transaction_id: event.transaction_id,
           end: event.end,
-          duration: event.duration,
         }
       )
       ::LogStash::Event.new(data.merge(source: ::LogStasher.source))
     end
+
+    def runtimes(event)
+      if event.duration
+        { duration: event.duration.to_f.round(2) }
+      else
+        {}
+      end
+    end
+
+
+    def request_context
+      ::LogStasher.request_context
+    end
+
+    def extract_custom_fields(data)
+      custom_fields = (!::LogStasher.custom_fields.empty? && data.extract!(*::LogStasher.custom_fields)) || {}
+      ::LogStasher.custom_fields.clear
+      custom_fields
+    end
+
   end
 end
 
