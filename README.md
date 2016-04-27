@@ -18,8 +18,7 @@ LoggerInstrumentation.info({message: "mylog message", otherdata: "this is other 
 This will automatically as always create the proper log entries in the specified log file but uses ActiveSupport::Notifications in the background
 and by this supports multiple ActiveSupport::LogSubscribers with different log handling (like for example [logstash](http://www.logstash.net)).
 
-I made an example implementation for [LogStasher](https://github.com/shadabahmed/logstasher) so that the logs can benefit from the additional 
-information supported by LogStasher like the
+I made an example implementation for [LogStasher](https://github.com/shadabahmed/logstasher) so that the logs can benifit from the additional information supported by LogStasher like the
 ``resource_context`` or others.
 
 ## Installation

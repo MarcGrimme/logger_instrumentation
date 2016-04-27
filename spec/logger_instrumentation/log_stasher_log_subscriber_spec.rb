@@ -9,11 +9,11 @@ describe LoggerInstrumentation::LogStasherLogSubscriber do
   let(:format) { '\#{payload[:message]} here I am' }
   let(:start_ts) { 2.minutes.ago }
   let(:end_ts) { Time.now }
-  let(:event) { ActiveSupport::Notifications::Event.new("info.application", start_ts, end_ts, 2, Hash.new) }
+  let(:event) { ActiveSupport::Notifications::Event.new("info.fidor_application", start_ts, end_ts, 2, Hash.new) }
   let(:severity) { :info }
   let(:logger) { double(Logger) }
   let(:result_hash) do {
-    name: 'info.application', 
+    name: 'info.fidor_application', 
     time: start_ts, 
     transaction_id: 2, 
     end: end_ts,
