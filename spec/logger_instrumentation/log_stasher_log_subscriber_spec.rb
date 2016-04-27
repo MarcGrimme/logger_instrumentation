@@ -17,7 +17,7 @@ describe LoggerInstrumentation::LogStasherLogSubscriber do
     time: start_ts, 
     transaction_id: 2, 
     end: end_ts,
-    duration: 1000.0 * (end_ts - start_ts),
+    duration: (1000.0 * (end_ts - start_ts)).round(2),
     source: "unknown"
   }
   end
