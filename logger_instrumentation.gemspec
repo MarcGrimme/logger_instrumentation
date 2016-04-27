@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.9"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_runtime_dependency 'logstasher', '~> 0.6.5'
+  spec.add_runtime_dependency 'logstasher'
   spec.add_runtime_dependency 'logstash-event', '~> 1.2.0'
   spec.add_runtime_dependency 'activesupport', '>= 3.0'
 
