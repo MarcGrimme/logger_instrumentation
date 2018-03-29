@@ -5,10 +5,10 @@ describe LoggerInstrumentation::LogSubscriber do
   let(:subscriber) { LoggerInstrumentation::LogSubscriber.new }
 
   let(:message) { "hello world" }
-  let(:format) { '\#{payload[:message]} here I am' }
   let(:event) { ActiveSupport::Notifications::Event.new("info.fidor_application", Time.now, Time.now, 2, Hash.new) }
   let(:severity) { :info }
   let(:logger) { double(Logger) }
+  let(:format) { "#{event.payload[:message]} here I am" }
 
   before do
     allow(subscriber).to receive(:logger).and_return(logger)
@@ -22,7 +22,6 @@ describe LoggerInstrumentation::LogSubscriber do
   end
 
   it "passes formated message to attached logger when format given" do
-    pending
     event.payload[:message] = message
     event.payload[:format] = format
     expect(subscriber.logger).to receive(severity).with("hello world here I am")
