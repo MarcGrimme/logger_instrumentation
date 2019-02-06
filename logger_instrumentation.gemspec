@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "rake", "~> 12.0"
-  spec.add_runtime_dependency 'logstasher', '~> 1.0.0'
+  spec.add_runtime_dependency 'logstasher', '~> 1.3.0'
   spec.add_runtime_dependency 'logstash-event', '~> 1.2.0'
   spec.add_runtime_dependency 'activesupport', '>= 4.0'
 
